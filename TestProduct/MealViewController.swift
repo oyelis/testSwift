@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     //MARK: properties
     @IBOutlet weak var mealLabel: UILabel!
@@ -58,12 +58,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     //MARK:Actions
     @IBAction func setDefaultText(_ sender: UIButton) {
         self.mealLabel.text = "Default meal"
-    }
-    @IBAction func swithValue(_ sender: UISwitch) {
-        if sender.isOn {
-            self.mealLabel.text = ""
-        }
-        sender.setOn(false, animated: true)
     }
     
     @IBAction func onImageTap(_ sender: Any) {
