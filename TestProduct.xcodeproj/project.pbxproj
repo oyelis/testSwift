@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA854F87202F77CA00C59EBC /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA854F86202F77CA00C59EBC /* RatingControl.swift */; };
 		DAFB1CAF202CD87100A29AE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB1CAE202CD87100A29AE0 /* AppDelegate.swift */; };
 		DAFB1CB1202CD87100A29AE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB1CB0202CD87100A29AE0 /* ViewController.swift */; };
 		DAFB1CB4202CD87100A29AE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAFB1CB2202CD87100A29AE0 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA854F86202F77CA00C59EBC /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		DAFB1CAB202CD87100A29AE0 /* TestProduct.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestProduct.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAFB1CAE202CD87100A29AE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DAFB1CB0202CD87100A29AE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			children = (
 				DAFB1CAE202CD87100A29AE0 /* AppDelegate.swift */,
 				DAFB1CB0202CD87100A29AE0 /* ViewController.swift */,
+				DA854F86202F77CA00C59EBC /* RatingControl.swift */,
 				DAFB1CB2202CD87100A29AE0 /* Main.storyboard */,
 				DAFB1CB5202CD87100A29AE0 /* Assets.xcassets */,
 				DAFB1CB7202CD87100A29AE0 /* LaunchScreen.storyboard */,
@@ -200,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAFB1CB1202CD87100A29AE0 /* ViewController.swift in Sources */,
+				DA854F87202F77CA00C59EBC /* RatingControl.swift in Sources */,
 				DAFB1CAF202CD87100A29AE0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,6 +358,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TestProduct/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sashaIOS.TestProduct;
@@ -368,6 +373,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TestProduct/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sashaIOS.TestProduct;
