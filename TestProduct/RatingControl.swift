@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable class RatingControl: UIStackView {
-
+    
     private var ratingButtons = [UIButton]()
     var rating = 0 {
         didSet{
@@ -102,12 +102,12 @@ import UIKit
     }
     
     /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
-
+     // Only override draw() if you perform custom drawing.
+     // An empty implementation adversely affects performance during animation.
+     override func draw(_ rect: CGRect) {
+     // Drawing code
+     }
+     */
+    
+    
 }

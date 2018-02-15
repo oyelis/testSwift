@@ -34,6 +34,7 @@ class MealTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.leftBarButtonItem = editButtonItem
         loadMealData()
         
         // Uncomment the following line to preserve selection between presentations
@@ -66,33 +67,64 @@ class MealTableViewController: UITableViewController {
             fatalError("Failed to get cell")
         }
         let obj:Meal = meals[indexPath.row]
+        cell.displayView.image = obj.image
         cell.nameLabel.text = obj.name
         cell.rating.rating = obj.rating
         // Configure the cell...
         
         return cell
     }
- 
     
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        switch (segue.identifier ?? "") {
+        case "ShowDetails":
+            guard let selectedMealView = segue.destination as? MealViewController else {
+                fatalError("Failed to get destination view")
+            }
+            guard let selectedCell = sender as? MealTableViewCell else {
+                fatalError("wrong sender")
+            }
+            guard let indexPath = tableView.indexPath(for: selectedCell) else {
+                fatalError("Failed to get selected path")
+            }
+            let selectedMeal = meals[indexPath.row]
+            selectedMealView.meal = selectedMeal
+        case "addItem":
+            print("add Item")
+        default:
+            fatalError("Wrong operation")
+        }
+    }
     
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
+    @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? MealViewController, let meal = sourceViewController.meal {
+            if let selectedRow = tableView.indexPathForSelectedRow {
+                meals[selectedRow.row] = meal
+                tableView.reloadRows(at: [selectedRow], with: .none)
+            } else {
+                // Add a new meal.
+                let newIndexPath = IndexPath(row: meals.count, section: 0)
+                meals.append(meal)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            meals.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
     
     /*
      // Override to support rearranging the table view.

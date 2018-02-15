@@ -9,16 +9,25 @@
 import UIKit
 
 class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     //MARK: properties
     @IBOutlet weak var mealLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var defaultPhoto: UIImageView!
+    @IBOutlet weak var save: UIBarButtonItem!
+    @IBOutlet weak var rateView: RatingControl!
+    
+    var meal: Meal?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.delegate = self
-        // Do any additional setup after loading the view, typically from a nib.
+        if let meal = meal {
+            mealLabel.text = meal.name
+            textField.text = meal.name
+            defaultPhoto.image = meal.image
+            rateView.rating = meal.rating
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,6 +53,15 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         mealLabel.text = textField.text
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let button = sender as? UIBarButtonItem, button === save else {
+            return
+        }
+        let name = mealLabel.text ?? ""
+        let image = defaultPhoto.image
+        let rate = rateView.rating
+        meal = Meal.init(name: name, image: image, rating: rate)
+    }
     
     //MARK: UIImagePickerDelegate
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -60,13 +78,23 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         self.mealLabel.text = "Default meal"
     }
     
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        let isAddItemNavigation = presentedViewController is UINavigationController
+        if isAddItemNavigation {
+            dismiss(animated: true, completion: nil)
+        } else if let ownNavController = navigationController {
+            ownNavController.popViewController(animated: true)
+        } else {
+            fatalError("Unknown sourse")
+        }
+    }
+    
     @IBAction func onImageTap(_ sender: Any) {
         textField.resignFirstResponder()
         let uiImagePickerController = UIImagePickerController()
         uiImagePickerController.sourceType = .photoLibrary
         uiImagePickerController.delegate = self
         present(uiImagePickerController,animated: true,completion: nil)
-        
     }
 }
 
