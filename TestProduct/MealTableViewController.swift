@@ -35,7 +35,12 @@ class MealTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = editButtonItem
-        loadMealData()
+        
+        if let savedMeals = loadMeals() {
+            meals += savedMeals
+        } else {
+            loadMealData()
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -108,7 +113,18 @@ class MealTableViewController: UITableViewController {
                 meals.append(meal)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
+            saveMeals()
         }
+    }
+    
+    //Archive data locally
+    private func saveMeals(){
+        NSKeyedArchiver.archiveRootObject(meals, toFile: Meal.ArchiveURL.path)
+    }
+    
+    //Unarchive data
+    private func loadMeals() -> [Meal]? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Meal.ArchiveURL.path) as? [Meal]
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -124,6 +140,7 @@ class MealTableViewController: UITableViewController {
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
+        saveMeals()
     }
     
     /*
